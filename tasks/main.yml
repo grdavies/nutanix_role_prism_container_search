@@ -1,5 +1,11 @@
 ---
 # tasks file for nutanix_role_prism_container_search
+  - name: Fail if "{{ nutanix_host }}" is not a Prism Element cluster
+    ansible.builtin.fail:
+      msg: "this role can only be run against a Nutanix cluster"
+    when:
+      - nutanix_endpoint_prism_type != 'pe'
+
   - name: Find uuid for container "{{ nutanix_container_search_name }}" on "{{ nutanix_host }}"
     block:
       - name: Get containers from Prism API
