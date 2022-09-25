@@ -31,10 +31,10 @@
 
       - name:
         debug:
-          msg: "found uuid '{{ nutanix_container_found_uuid }}' for '{{ nutanix_container_search_name }}' on '{{ nutanix_host }}'"
+          msg: "uuid='{{ nutanix_container_found_uuid }}', container_name='{{ nutanix_container_search_name }}' on Prism Element '{{ nutanix_host }}'"
         when: nutanix_container_found_uuid is defined
 
       - name:
         debug:
-          msg: "no uuid found for '{{ nutanix_container_search_name }}' on '{{ nutanix_host }}'"
+          msg: "uuid=null, container_name='{{ nutanix_container_search_name }}' on Prism Element '{{ nutanix_host }}'"
         when: nutanix_container_found_uuid is not defined
