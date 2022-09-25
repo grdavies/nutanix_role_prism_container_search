@@ -1,0 +1,17 @@
+galaxy_info:
+  author: Ross Davies
+  description: Role to seach for a specific container and return its UUID on a Nutanix Cluster
+  company: N/A
+
+  license: MIT
+
+  min_ansible_version: 2.1
+
+  galaxy_tags:
+    - Nutanix
+    - Prism
+    - Container
+    - Search
+
+dependencies:
+  - grdavies.nutanix_role_prism_init_api

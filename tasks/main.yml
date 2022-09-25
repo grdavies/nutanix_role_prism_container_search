@@ -1,0 +1,34 @@
+---
+# tasks file for nutanix_role_prism_container_search
+  - name: Find uuid for container "{{ nutanix_container_search_name }}" on "{{ nutanix_host }}"
+    block:
+      - name: Get containers from Prism API
+        uri:
+          url: "{{ nutanix_api_v2 }}/storage_containers"
+          method: GET
+          validate_certs: "{{ validate_certs }}"
+          body_format: json
+          headers:
+            Authorization: "{{ nutanix_api_auth }}"
+          status_code: 200
+          return_content: yes
+        register: nutanix_current_containers
+        ignore_errors: no
+
+      - name: Search container list for container name and return its uuid
+        set_fact:
+          nutanix_container_found_uuid: "{{ item }}"
+        with_items: "{{ nutanix_current_containers.json | to_json | from_json | json_query(query) }}"
+        vars:
+          query: "entities[?name=='{{ nutanix_container_search_name }}'].storage_container_uuid"
+        when: nutanix_current_containers.json.metadata.total_entities > 0
+
+      - name:
+        debug:
+          msg: "found uuid '{{ nutanix_container_found_uuid }}' for '{{ nutanix_container_search_name }}' on '{{ nutanix_host }}'"
+        when: nutanix_container_found_uuid is defined
+
+      - name:
+        debug:
+          msg: "no uuid found for '{{ nutanix_container_search_name }}' on '{{ nutanix_host }}'"
+        when: nutanix_container_found_uuid is not defined
