@@ -11,7 +11,7 @@ Inputs
 
 | Variable                      | Required | Default | Choices                   | Comments                                                                             |
 |-------------------------------|----------|---------|---------------------------|--------------------------------------------------------------------------------------|
-| nutanix_host                  | yes      |         |                           | The IP address or FQDN for the Prism (Element or Central) which you want to connect. |
+| nutanix_host                  | yes      |         |                           | The IP address or FQDN for the Prism (Element only) which you want to connect.       |
 | nutanix_username              | yes      |         |                           | A valid username with appropriate rights to access the Nutanix API.                  |
 | nutanix_password              | yes      |         |                           | A valid password for the supplied username.                                          |
 | nutanix_port                  | no       | 9440    |                           | The Prism TCP port.                                                                  |
